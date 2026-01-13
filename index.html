@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>WinGo Ultra AI - MADARA PRO (Logic 99)</title>
+    <title>WinGo Ultra AI - MADARA PRO</title>
     
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
         import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
 
-        // IMPORTANT: Replace with your actual Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyBTTVVmV2J4A8QqG9gaTFjhTzDW6RqgNps",
             authDomain: "madara-62f7b.firebaseapp.com",
@@ -38,42 +37,41 @@
     </script>
 
     <style>
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: #f8faf8; overflow-x: hidden; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: #fff5f5; overflow-x: hidden; }
         .wingo-app-container { max-width: 450px; margin: 0 auto; background-color: #ffffff; min-height: 100vh; padding-bottom: 20px; }
         
-        /* Tab Styles with New Color */
+        /* Tab Styles with New Color #FFB3AE */
         .top-tabs-container { display: flex; padding: 10px 5px; gap: 5px; }
-        .tab { display: flex; flex-direction: column; align-items: center; flex-grow: 1; padding: 10px 4px; border-radius: 12px; font-size: 11px; background-color: #e8f5e9; color: #2e7d32; cursor: pointer; transition: 0.1s; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .tab:before { content: ''; display: block; width: 22px; height: 22px; margin-bottom: 4px; background-image: url('https://firebasestorage.googleapis.com/v0/b/i-to-u.appspot.com/o/publicimage%2F1000481654.png?alt=media'); background-size: contain; filter: hue-rotate(60deg); }
-        .tab.active { background-color: #B3EDA9; color: #1b5e20; font-weight: bold; }
+        .tab { display: flex; flex-direction: column; align-items: center; flex-grow: 1; padding: 10px 4px; border-radius: 12px; font-size: 11px; background-color: #fff0f0; color: #b35a55; cursor: pointer; transition: 0.1s; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .tab:before { content: ''; display: block; width: 22px; height: 22px; margin-bottom: 4px; background-image: url('https://firebasestorage.googleapis.com/v0/b/i-to-u.appspot.com/o/publicimage%2F1000481654.png?alt=media'); background-size: contain; filter: hue-rotate(330deg); }
+        .tab.active { background-color: #FFB3AE; color: #7a2b27; font-weight: bold; }
         
         .game-info-section { padding: 10px; display: flex; justify-content: center; }
         
-        /* Card with New Color Gradient */
-        .info-card-container { display: flex; position: relative; background: linear-gradient(135deg, #B3EDA9 0%, #dcf7d7 100%); color: #1b5e20; border-radius: 12px; padding: 15px 12px; width: 92%; max-width: 400px; box-shadow: 0 6px 15px rgba(179, 237, 169, 0.3); overflow: hidden; mask-image: radial-gradient(circle at 50% 0, transparent 12px, black 13px), radial-gradient(circle at 50% 100%, transparent 12px, black 13px); -webkit-mask-image: radial-gradient(circle at 50% 0, transparent 12px, black 13px), radial-gradient(circle at 50% 100%, transparent 12px, black 13px); mask-composite: intersect; -webkit-mask-composite: source-in; }
-        .info-card-container::before { content: ''; position: absolute; left: 50%; top: 10px; bottom: 10px; width: 1px; border-left: 2px dotted rgba(27,94,32,0.2); transform: translateX(-50%); }
+        /* Card with New Color #FFB3AE Gradient */
+        .info-card-container { display: flex; position: relative; background: linear-gradient(135deg, #FFB3AE 0%, #ffe4e2 100%); color: #7a2b27; border-radius: 12px; padding: 15px 12px; width: 92%; max-width: 400px; box-shadow: 0 6px 15px rgba(255, 179, 174, 0.4); overflow: hidden; mask-image: radial-gradient(circle at 50% 0, transparent 12px, black 13px), radial-gradient(circle at 50% 100%, transparent 12px, black 13px); -webkit-mask-image: radial-gradient(circle at 50% 0, transparent 12px, black 13px), radial-gradient(circle at 50% 100%, transparent 12px, black 13px); mask-composite: intersect; -webkit-mask-composite: source-in; }
+        .info-card-container::before { content: ''; position: absolute; left: 50%; top: 10px; bottom: 10px; width: 1px; border-left: 2px dotted rgba(122,43,39,0.2); transform: translateX(-50%); }
         
         .info-left, .info-right { flex: 1; z-index: 1; display: flex; flex-direction: column; }
         .info-right { text-align: right; align-items: flex-end; }
-        .label-text { font-size: 10px; font-weight: 700; color: #2e7d32; margin-bottom: 6px; text-transform: uppercase; }
+        .label-text { font-size: 10px; font-weight: 700; color: #b35a55; margin-bottom: 6px; text-transform: uppercase; }
         
-        /* Timer Segments */
         .timer-display-container { display: flex; align-items: center; gap: 3px; }
-        .timer-segment { background-color: #ffffff; color: #1b5e20; width: 20px; height: 28px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; border-radius: 3px; clip-path: polygon(20% 0, 80% 0, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0 80%, 0 20%); }
+        .timer-segment { background-color: #ffffff; color: #7a2b27; width: 20px; height: 28px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; border-radius: 3px; clip-path: polygon(20% 0, 80% 0, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0 80%, 0 20%); }
         
         .recent-res-img { width: 22px; height: 22px; }
         .betting-numbers-container { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; padding: 15px; min-height: 140px; }
         .number-image-wrapper img { width: 48px; height: 48px; transition: 0.2s; }
         
-        /* History Navigation New Color */
+        /* History Navigation with New Color */
         .history-nav-container { display: flex; padding: 0 15px; gap: 4px; }
-        .history-nav-btn { padding: 12px; cursor: pointer; background-color: #e8f5e9; flex: 1; text-align: center; color: #2e7d32; font-weight: bold; border-top-left-radius: 15px; border-top-right-radius: 15px; }
-        .history-nav-btn.active { background-color: #B3EDA9; color: #1b5e20; }
+        .history-nav-btn { padding: 12px; cursor: pointer; background-color: #fff0f0; flex: 1; text-align: center; color: #b35a55; font-weight: bold; border-top-left-radius: 15px; border-top-right-radius: 15px; }
+        .history-nav-btn.active { background-color: #FFB3AE; color: #7a2b27; }
         
-        .history-table-wrapper { max-height: 400px; overflow-y: auto; border: 1px solid #e1eee0; border-radius: 0 0 12px 12px; }
+        .history-table-wrapper { max-height: 400px; overflow-y: auto; border: 1px solid #ffe4e2; border-radius: 0 0 12px 12px; }
         table { width: 100%; border-collapse: collapse; background: white; text-align: center; }
-        th { background: #B3EDA9; color: #1b5e20; padding: 10px 5px; font-size: 12px; position: sticky; top: 0; z-index: 2; }
-        td { padding: 12px 5px; font-size: 13px; border-bottom: 1px solid #f1f8f1; }
+        th { background: #FFB3AE; color: #7a2b27; padding: 10px 5px; font-size: 12px; position: sticky; top: 0; z-index: 2; }
+        td { padding: 12px 5px; font-size: 13px; border-bottom: 1px solid #fff5f5; }
         .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
 
         @keyframes sequentialJump {
@@ -104,10 +102,10 @@
                 <div class="label-text">Time Remaining</div>
                 <div class="timer-display-container">
                     <span class="timer-segment" id="m1">0</span><span class="timer-segment" id="m2">0</span>
-                    <span style="font-weight:bold; color:#1b5e20;">:</span>
+                    <span style="font-weight:bold; color:#7a2b27;">:</span>
                     <span class="timer-segment" id="s1">0</span><span class="timer-segment" id="s2">0</span>
                 </div>
-                <div style="font-size: 11px; font-weight: 700; color: #2e7d32;"><span id="period-id">0000</span></div>
+                <div style="font-size: 11px; font-weight: 700; color: #b35a55;"><span id="period-id">0000</span></div>
             </div>
         </div>
     </div>
@@ -144,67 +142,62 @@
     };
     const NUM_IMG = { 0: 'https://firebasestorage.googleapis.com/v0/b/i-to-u.appspot.com/o/publicimage%2F1000482339.png?alt=media', 1: 'https://firebasestorage.googleapis.com/v0/b/i-to-u.appspot.com/o/publicimage%2F1000482340.png?alt=media', 2: 'https://firebasestorage.googleapis.com/v0/b/i-to-u.appspot.com/o/publicimage%2F1000482341.png?alt=media', 3: 'https://firebasestorage.googleapis.com/v0/b/i-to-u.appspot.com/o/publicimage%2F1000482342.png?alt=media', 4: 'https://firebasestorage.googleapis.com/v0/b/i-to-u.appspot.com/o/publicimage%2F1000482343.png?alt=media', 5: 'https://firebasestorage.googleapis.com/v0/b/i-to-u.appspot.com/o/publicimage%2F1000482344.png?alt=media', 6: 'https://firebasestorage.googleapis.com/v0/b/i-to-u.appspot.com/o/publicimage%2F1000482345.png?alt=media', 7: 'https://firebasestorage.googleapis.com/v0/b/i-to-u.appspot.com/o/publicimage%2F1000482346.png?alt=media', 8: 'https://firebasestorage.googleapis.com/v0/b/i-to-u.appspot.com/o/publicimage%2F1000482347.png?alt=media', 9: 'https://firebasestorage.googleapis.com/v0/b/i-to-u.appspot.com/o/publicimage%2F1000482348.png?alt=media' };
 
-    class IsolatedEngine {
+    class ADXEngine {
         constructor() {
             this.rawHistory = { "30s": [], "1 Min": [], "3 Min": [], "5 Min": [] };
             this.userPredictions = { "30s": [], "1 Min": [], "3 Min": [], "5 Min": [] };
+            this.consecutiveLosses = { "30s": 0, "1 Min": 0, "3 Min": 0, "5 Min": 0 };
+            this.lastPrediction = { "30s": null, "1 Min": null, "3 Min": null, "5 Min": null };
         }
-        
-        /**
-         * Logic 99: Last 4 Results Analysis (Streak Reversal / Majority Rule)
-         * This is the new calculation logic as requested.
-         */
+
         predict(mode) {
-            const rawH = this.rawHistory[mode];
-            if (rawH.length < 4) return Math.random() > 0.5 ? "BIG" : "SMALL"; // Default if not enough history
+            const history = this.rawHistory[mode];
+            const losses = this.consecutiveLosses[mode];
+            const lastPred = this.lastPrediction[mode];
 
-            // Get only the most recent 4 results (rawH is reversed, so last 4 elements are oldest, but we take first 4)
-            const lastFourResults = rawH.slice(0, 4); 
+            if (history.length < 3) return Math.random() > 0.5 ? "BIG" : "SMALL";
+
+            const recent = history.slice(-20).map(r => ({ resultType: r }));
+            const streak = this.getStreak(recent);
+
+            // Logic 22: Loss Recovery (ADX 2.0)
+            if (losses >= 2 && lastPred) return lastPred === "BIG" ? "SMALL" : "BIG";
             
-            let bigCount = 0;
-            let smallCount = 0;
+            // Logic 1: Streak Detection (ADX 2.0)
+            if (streak >= 3) return recent[recent.length - 1].resultType === "BIG" ? "SMALL" : "BIG";
 
-            lastFourResults.forEach(res => {
-                if (res === "BIG") bigCount++;
-                else if (res === "SMALL") smallCount++;
-            });
-
-            let prediction;
-
-            // 1. Extreme Streak Reversal (BBBB -> SMALL / SSSS -> BIG)
-            if (bigCount === 4) {
-                prediction = "SMALL";
-            } 
-            else if (smallCount === 4) {
-                prediction = "BIG";
-            } 
-            // 2. Strong Majority 
-            else if (bigCount > smallCount) {
-                prediction = "BIG"; 
-            } 
-            else if (smallCount > bigCount) {
-                prediction = "SMALL";
-            } 
-            // 3. Balanced Pattern (2 BIG, 2 SMALL) -> Predict Opposite of Last (index 0 is the most recent)
-            else { 
-                prediction = lastFourResults[0] === "BIG" ? "SMALL" : "BIG";
+            // Logic 6: Mirror Pattern (ADX 2.0)
+            if (recent.length >= 4) {
+                const s = recent.slice(-4);
+                if (s[0].resultType === s[2].resultType && s[1].resultType === s[3].resultType && s[0].resultType !== s[1].resultType) {
+                    return s[2].resultType;
+                }
             }
 
-            return prediction;
+            // Logic 8: Weighted Probability
+            const bigs = recent.filter(r => r.resultType === "BIG").length;
+            return bigs > recent.length / 2 ? "SMALL" : "BIG";
+        }
+
+        getStreak(recent) {
+            const last = recent[recent.length - 1].resultType;
+            let s = 0;
+            for (let i = recent.length - 1; i >= 0; i--) {
+                if (recent[i].resultType === last) s++; else break;
+            }
+            return s;
         }
     }
 
-    const engine = new IsolatedEngine();
-    let currentMode = "1 Min", lastPeriodStored = { "30s": "", "1 Min": "", "3 Min": "", "5 Min": "" }, modeDisplayState = { "30s": "", "1 Min": "", "3 Min": "", "5 Min": "" }, isAnimating = false;
+    const engine = new ADXEngine();
+    let currentMode = "1 Min", lastPeriodStored = {}, isAnimating = false;
 
     window.changeMode = (mode, el) => {
         currentMode = mode;
         document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
         el.classList.add('active');
         document.getElementById('game-title').innerText = "WinGo " + mode;
-        document.getElementById('prediction-circles').innerHTML = modeDisplayState[currentMode];
         updateData(true);
-        updateMyHistoryUI();
     };
 
     async function updateData(modeSwitch = false) {
@@ -213,27 +206,40 @@
             const res = await fetch(`https://draw.ar-lottery01.com/WinGo/WinGo_${api}/GetHistoryIssuePage.json?ts=${Date.now()}`);
             const json = await res.json();
             const list = json.data.list;
-            
-            // The list is in chronological order, list[0] is the latest result
             const currentP = list[0].issueNumber;
             const nextP = (BigInt(currentP) + 1n).toString();
-            
-            // Store history in reverse chronological order (latest result first)
-            engine.rawHistory[currentMode] = list.slice(0, 50).map(i => parseInt(i.number) >= 5 ? "BIG" : "SMALL");
-            
+
+            engine.rawHistory[currentMode] = list.slice(0, 50).reverse().map(i => parseInt(i.number) >= 5 ? "BIG" : "SMALL");
+
             if (currentP !== lastPeriodStored[currentMode]) {
+                const prev = engine.userPredictions[currentMode][0];
+                if (prev && prev.status === "Pending") {
+                    const actual = parseInt(list[0].number) >= 5 ? "BIG" : "SMALL";
+                    if (actual !== prev.pred) engine.consecutiveLosses[currentMode]++;
+                    else engine.consecutiveLosses[currentMode] = 0;
+                }
                 lastPeriodStored[currentMode] = currentP;
                 runAnimation(nextP);
-            } else if (modeSwitch && !modeDisplayState[currentMode]) {
-                showFinalPrediction(nextP, false);
             }
             renderTables(list);
         } catch(e) {}
     }
 
-    async function showFinalPrediction(nextP, updateHist = true) {
-        if(isAnimating) return;
-        const p = engine.predict(currentMode); // Use the new Logic 99 prediction
+    function runAnimation(nextP) {
+        if (isAnimating) return; isAnimating = true;
+        document.getElementById('prediction-circles').innerHTML = Array.from({length:10}, (_,i) => `<div class="number-image-wrapper" id="ball-${i}"><img src="${IMG.Q}" style="opacity:0.6;"></div>`).join('');
+        let loops = 0;
+        const interval = setInterval(() => {
+            document.querySelectorAll('.number-image-wrapper img').forEach(img => img.classList.remove('bounce-active'));
+            const ball = document.getElementById(`ball-${loops % 10}`);
+            if(ball) ball.querySelector('img').classList.add('bounce-active');
+            loops++;
+            if (loops > 15) { clearInterval(interval); isAnimating = false; showFinalPrediction(nextP); }
+        }, 120);
+    }
+
+    function showFinalPrediction(nextP) {
+        const p = engine.predict(currentMode);
         const stop = Math.floor(Math.random() * 10);
         const html = Array.from({length:10}, (_,i) => {
             const isW = i === stop;
@@ -241,41 +247,23 @@
             return `<div class="number-image-wrapper"><img src="${isW ? (p==='BIG'?IMG.BIG:IMG.SML) : IMG.Q}" ${s}></div>`;
         }).join('');
         document.getElementById('prediction-circles').innerHTML = html;
-        modeDisplayState[currentMode] = html;
-        if (updateHist && !engine.userPredictions[currentMode].some(u => u.period === nextP)) {
+        if (!engine.userPredictions[currentMode].some(u => u.period === nextP)) {
+            engine.lastPrediction[currentMode] = p;
             engine.userPredictions[currentMode].unshift({ period: nextP, pred: p, status: "Pending" });
             updateMyHistoryUI();
         }
     }
 
-    function runAnimation(nextP) {
-        if (isAnimating) return; isAnimating = true;
-        document.getElementById('prediction-circles').innerHTML = Array.from({length:10}, (_,i) => `<div class="number-image-wrapper" id="ball-${i}"><img src="${IMG.Q}" style="opacity:0.6;"></div>`).join('');
-        let curr = 0, loops = 0;
-        const interval = setInterval(() => {
-            document.querySelectorAll('.number-image-wrapper img').forEach(img => img.classList.remove('bounce-active'));
-            const ball = document.getElementById(`ball-${curr % 10}`);
-            if(ball) ball.querySelector('img').classList.add('bounce-active');
-            curr++; loops++;
-            if (loops > 20) { clearInterval(interval); isAnimating = false; showFinalPrediction(nextP, true); }
-        }, 120);
-    }
-
     function renderTables(list) {
         document.getElementById('period-id').textContent = (BigInt(list[0].issueNumber) + 1n).toString();
         document.getElementById('recent-results-display').innerHTML = list.slice(0, 4).map(i => `<img src="${NUM_IMG[parseInt(i.number)]}" class="recent-res-img">`).join('');
-        
-        // Game History Table Rendering
         document.getElementById('history-body').innerHTML = list.slice(0, 10).map(i => {
-            const n = parseInt(i.number), 
-                  c = (n==0||n==5) ? '#a020f0' : (n%2==0 ? '#ff3366' : '#279010'); // Violet/Red/Green Color Logic
+            const n = parseInt(i.number), c = (n==0||n==5) ? '#a020f0' : (n%2==0 ? '#ff3366' : '#279010');
             return `<tr><td>${i.issueNumber}</td><td style="color:${c};font-weight:bold">${n}</td><td>${n>=5?'Big':'Small'}</td><td><span class="dot" style="background:${c}"></span></td></tr>`;
         }).join('');
-        
-        // Update My History Status
         engine.userPredictions[currentMode].forEach(u => {
             const m = list.find(l => l.issueNumber === u.period);
-            if(m && u.status === "Pending") u.status = (u.pred === (parseInt(m.number) >= 5 ? "BIG" : "SMALL")) ? "WIN" : "LOSS";
+            if(m) u.status = (u.pred === (parseInt(m.number) >= 5 ? "BIG" : "SMALL")) ? "WIN" : "LOSS";
         });
         updateMyHistoryUI();
     }
@@ -288,28 +276,14 @@
     setInterval(() => {
         const now = new Date();
         const sTotal = now.getSeconds() + now.getMinutes() * 60;
-        let t = 60;
-        if(currentMode==="30s") t=30; else if(currentMode==="3 Min") t=180; else if(currentMode==="5 Min") t=300;
+        let t = currentMode==="30s" ? 30 : (currentMode==="3 Min" ? 180 : (currentMode==="5 Min" ? 300 : 60));
         let rem = t - (sTotal % t);
-        
-        // Timer display logic
-        const minutes = Math.floor(rem/60);
-        const seconds = rem % 60;
-        document.getElementById('m1').textContent = Math.floor(minutes/10); 
-        document.getElementById('m2').textContent = minutes % 10;
-        document.getElementById('s1').textContent = Math.floor(seconds/10); 
-        document.getElementById('s2').textContent = seconds % 10;
-        
-        if (rem === t || rem === 1) updateData(); // Trigger data update when timer hits 0 or 1 second remaining
+        document.getElementById('m1').textContent = "0"; document.getElementById('m2').textContent = Math.floor(rem/60);
+        document.getElementById('s1').textContent = Math.floor((rem%60)/10); document.getElementById('s2').textContent = (rem%60)%10;
+        if (rem === t || rem === 1) updateData();
     }, 1000);
 
-    window.onload = () => {
-        const q = Array.from({length:10}, () => `<div class="number-image-wrapper"><img src="${IMG.Q}" style="opacity:0.6;"></div>`).join('');
-        modeDisplayState = { "30s": q, "1 Min": q, "3 Min": q, "5 Min": q };
-        document.getElementById('prediction-circles').innerHTML = q;
-        updateData();
-    };
-
+    window.onload = () => updateData();
     document.getElementById('game-history-btn').onclick = () => { document.getElementById('game-history-table').style.display='block'; document.getElementById('my-history-content').style.display='none'; document.getElementById('game-history-btn').classList.add('active'); document.getElementById('my-history-btn').classList.remove('active'); };
     document.getElementById('my-history-btn').onclick = () => { document.getElementById('my-history-content').style.display='block'; document.getElementById('game-history-table').style.display='none'; document.getElementById('my-history-btn').classList.add('active'); document.getElementById('game-history-btn').classList.remove('active'); updateMyHistoryUI(); };
 </script>
